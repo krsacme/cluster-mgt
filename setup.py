@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import subprocess
@@ -40,7 +40,7 @@ def construct_beaker_args(beaker_user, beaker_pswd, beaker_node,
     elif centos == '7':
         args.extend(['--image', 'centos-7.6'])
     else:
-        args.extend(['--image', 'rhel-7.6'])
+        args.extend(['--image', 'rhel-7.8'])
     args.extend(['--beaker-user', beaker_user])
     args.extend(['--beaker-password', beaker_pswd])
     # Host address of the host to provision as referenced by beaker
@@ -102,7 +102,19 @@ def setup_node(beaker_nodes, rhosp_version=None, templates_dir=None, rhosp_build
         extra_vars['templates_dir'] = templates_dir
     if rhosp_build:
         extra_vars['rhosp_build'] = rhosp_build
-    execute.ansible_playbook('hosts', 'playbooks/node-prep.yaml', extra_vars=extra_vars)
+    run('playbooks/node-prep.yaml', extra_vars)
+
+def run(play, extra_vars):
+    args = []
+    for k,v in extra_vars.items():
+        args.extend(['-e', k + '=' + str(v)])
+    cmd = ['ansible-playbook', '-i', 'hosts', play]
+    cmd.extend(args)
+    p = subprocess.Popen(cmd)
+    p.communicate()
+    p_status = p.wait()
+    if p_status != 0:
+        sys.exit(1)
 
 def subscription(beaker_nodes, rhel_subs_user, rhel_subs_pass, rhel_subs_pool):
     if beaker_nodes:
