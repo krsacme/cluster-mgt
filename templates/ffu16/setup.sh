@@ -43,10 +43,6 @@ if [ -n "" ]; then
     popd
 fi
 
-# move neutron-ovs.yaml inclusion location
-sudo yum install patch -y
-curl -4 https://review.opendev.org/changes/747562/revisions/dd184988862e6d10b127658bcebc4662f232f1cd/patch?download | base64 -d | sudo patch -d $(pwd)/plugins/tripleo-upgrade -p1
-
 # use mv instead of symbolic link to avoid too many levels of symbolic links issue
 mkdir -p $(pwd)/plugins/tripleo-upgrade/infrared_plugin/roles/tripleo-upgrade
 find $(pwd)/plugins/tripleo-upgrade -maxdepth 1 -mindepth 1 -not -name infrared_plugin -exec mv '{}' $(pwd)/plugins/tripleo-upgrade/infrared_plugin/roles/tripleo-upgrade \;
