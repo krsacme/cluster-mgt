@@ -24,6 +24,7 @@ infrared virsh \
     --topology-network 3_bridges_1_net
 
 infrared tripleo-undercloud \
+    --mirror "rdu2" \
     --images-task=rpm \
     --images-update no \
     --version="{{ rhosp_version }}" \
