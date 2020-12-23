@@ -48,7 +48,7 @@ mkdir -p $(pwd)/plugins/tripleo-upgrade/infrared_plugin/roles/tripleo-upgrade
 find $(pwd)/plugins/tripleo-upgrade -maxdepth 1 -mindepth 1 -not -name infrared_plugin -exec mv '{}' $(pwd)/plugins/tripleo-upgrade/infrared_plugin/roles/tripleo-upgrade \;
 
 if [ ! -f workarounds.yaml ]; then
-    curl -ko workarounds.yaml https://gitlab.cee.redhat.com/osp16/ffwd2/raw/master/infrared/workarounds/ffwd2_workarounds_unsubscribed.yaml
+    curl -sSko workarounds.yaml https://gitlab.cee.redhat.com/rhos-upgrades/workarounds/-/raw/master/upgrade/13-16.1_upgrade_workarounds.yaml
     sed -i -E 's|(.*rhos-release 16.1.*)-p [A-Za-z0-9_.-]+|\1-p passed_phase2|' workarounds.yaml
     sed -i  's/redhat\.local/localdomain/g' workarounds.yaml
 fi
