@@ -197,6 +197,10 @@ def main(argv):
                          dest='feature_offload',
                          action='store_true',
                          help='Enable offload deployment')
+    general.add_argument('--nic-part',
+                         dest='feature_nic_part',
+                         action='store_true',
+                         help='Enable NIC Paritioning deployment')
     args = parser.parse_args(argv)
     if not argv:
         parser.print_help()
@@ -220,6 +224,9 @@ def main(argv):
         print("Performing offload deployment")
         pool_vars['feature_offload'] = True
 
+    if args.feature_nic_part:
+        print("Performing NIC partitioning deployment")
+        pool_vars['feature_nic_part'] = True
 
     if args.beaker_user and node_list:
         beaker_pswd = getpass.getpass('Enter Beaker Password:')

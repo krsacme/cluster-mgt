@@ -118,13 +118,23 @@
           mode: 0755
         when:
           - feature_offload is not defined or not feature_offload
+          - feature_nic_part is not defined or not feature_nic_part
   
       - name: copy offload deploy script
         copy:
           src: "{{ templates_dir }}/overcloud_deploy_offload.sh"
           dest: "{{ templates_dir_path }}/overcloud_deploy.sh"
           mode: 0755
-        when: feature_offload is defined and feature_offload
+        when:
+          - feature_offload is defined and feature_offload
+
+      - name: copy nic part deploy script
+        copy:
+          src: "{{ templates_dir }}/overcloud_deploy_nicpart.sh"
+          dest: "{{ templates_dir_path }}/overcloud_deploy.sh"
+          mode: 0755
+        when:
+          - feature_nic_part is defined and feature_nic_part
 
       - name: "Create Infrared deploy command"
         template:
