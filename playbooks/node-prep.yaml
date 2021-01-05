@@ -7,7 +7,7 @@
       include_tasks: mosh/tasks.yaml
 
     - name: Install basic package
-      command: yum install -y tmux wget git vim
+      command: yum install -y tmux wget git vim NetworkManager-glib
 
     - include_vars:
         file: "images.yaml"
