@@ -5,6 +5,7 @@ import subprocess
 from infrared.core import execute
 import getpass
 import os
+import shutil
 import sys
 import yaml
 
@@ -40,7 +41,8 @@ def construct_beaker_args(beaker_user, beaker_pswd, beaker_node,
     elif centos == '7':
         args.extend(['--image', 'centos-7.6'])
     else:
-        args.extend(['--image', 'rhel-7.8'])
+        shutil.copyfile('files/rhel-8.2.yml', 'infrared/rhel-8.2.ym.')
+        args.extend(['--image', 'rhel-8.2'])
     args.extend(['--beaker-user', beaker_user])
     args.extend(['--beaker-password', beaker_pswd])
     # Host address of the host to provision as referenced by beaker

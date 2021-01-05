@@ -9,7 +9,8 @@
   when: mosh_pkg.rc != 0
   block:
     - package:
-        name:  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        name:  https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+        disable_gpg_check: yes
     - package:
         name: mosh
     - package:

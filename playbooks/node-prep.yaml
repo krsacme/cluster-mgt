@@ -7,7 +7,7 @@
       include_tasks: mosh/tasks.yaml
 
     - name: Install basic package
-      command: yum install -y tmux wget git vim NetworkManager-glib
+      command: yum install -y tmux wget git vim
 
     - include_vars:
         file: "images.yaml"
@@ -40,7 +40,7 @@
           state: permissive
 
       - name: "Install required packages"
-        command: "yum install -y libvirt libvirt-python libguestfs libguestfs-tools-c libguestfs-xfs python-lxml qemu-kvm virt-install libselinux-python git gcc libffi-devel openssl-devel python-virtualenv"
+        command: "yum install -y libvirt libguestfs libguestfs-tools-c libguestfs-xfs qemu-kvm virt-install git gcc libffi-devel openssl-devel python3-virtualenv"
 
       - name: "Move the libvirt images folder to home"
         file:
